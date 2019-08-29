@@ -1,3 +1,7 @@
+/*
+Author: Paulius Staisiunas. 2016
+*/
+
 #include "con_lib.h"
 #include "func.h"
 #include "save_load.h"
@@ -148,7 +152,7 @@ int main(int argc, char** argv) {
 			int turnMark, gameStyle, width, heigth;
 			int load_status = loadFromFile(&BRD,"save_1.txt",&turnMark,&gameStyle,&width,&heigth);
 			if (load_status == -1){
-				continue; //nebuvo tinkamo failo
+				continue; //no save files. Currently one save file is looked for
 			}
 
 			if (load_status == 1 && gameStyle == 0){

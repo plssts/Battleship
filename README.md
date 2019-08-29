@@ -12,8 +12,13 @@ Initial issues:
 
 To do:
 
-- In 2 player mode, add some time before the 2nd player places their last ship and 1st player makes their shot.
+- Determine if scoring is actually necessary in this otherwise predetermined game.
+
+- Include graphical representations in the help screen - what markers look like and when.
 
 Further ideas:
 
+- Support for multiple save files.
+
 - Upgrade to socket communication and play the game on multiple machines.
+

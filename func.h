@@ -1,16 +1,23 @@
+/*
+Author: Paulius Staisiunas. 2016
+*/
+
 #ifndef GAME_F
 #define GAME_F
 typedef struct{
 	int x, y;
 }Point;
+
 typedef struct{
 	Point *pt;
 	int size;
 }Stack;
+
 typedef struct {
 	char name[50][21];
 	int score[50];
 } List;
+
 #ifndef BOARDS
 #define BOARDS
 typedef struct {
@@ -20,6 +27,7 @@ typedef struct {
 	int **aiShot;
 } Boards;
 #endif
+
 void seeTime ();
 void changePl ();
 void sort (List *data, int n, int criteria);
@@ -39,10 +47,10 @@ int setScr (int cursx, int cursy, int **plShip, int gameStyle, int width, int he
 
 int saveScr (int **plShip, int **plShot, int **aiShip, int **aiShot, int modeId, int turnMark, int gameStyle, int width, int heigth);
 /** 
-*	modeId = zaidimo rezimas (2 zaidejai/1 zaidejas).
-*	1 zaidejo rezimu modeId = 1, o turnMark = 0 (siuo atveju 0 net nenuskaitomas).
-*	2 zaideju rezimu modeId = 2, o turnMark = 0 (player2) arba turnMark = 1 (player1).
-*	Cia turnMark nusako 1-ojo arba 2-ojo zaidejo prioriteta sauti lentoje.
+*	modeId = gamemode (2 players or 1 player).
+*	1 player modeId = 1, turnMark = 0 (not used).
+*	2 player modeId = 2, turnMark = 0 (player2) or turnMark = 1 (player1).
+*	turnMark determines who has priority.
 **/
 
 int homeScr ();

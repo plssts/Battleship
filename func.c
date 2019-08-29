@@ -1,3 +1,7 @@
+/*
+Author: Paulius Staisiunas. 2016
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -34,7 +38,7 @@ void changePl (){
 	for (int i = 5; i > 0; i--){
 		con_set_color(0,1);
 		con_set_pos(4,5);
-		printf("Allow next player to make their shot\n");
+		printf("Allow the next player to make their shot\n");
 		con_set_pos(10,7);
 		con_set_color(2,0);
 		if (i <= 3){

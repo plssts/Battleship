@@ -1,8 +1,13 @@
+/*
+Author: Paulius Staisiunas. 2016
+*/
+
 #include "func.h"
 #include "con_lib.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 void sort (List *data, int n, int criteria){
 	while(1){
 		int swapd = 0;

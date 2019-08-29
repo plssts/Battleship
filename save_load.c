@@ -1,3 +1,7 @@
+/*
+Author: Paulius Staisiunas. 2016
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "con_lib.h"
@@ -47,15 +51,6 @@ void saveToFile (int **plShip, int **plShot, int **aiShip, int **aiShot, char *f
 		if (modeId == 2){
 			fwrite(&turnMark, sizeof(int), 1, fs);
 		}
-con_clear();
-printf("SAVE FUNC RECEIVED:\n");
-for (int i = 0; i < 10; i++){
-	for (int j = 0; j < 10; j++){
-		printf("%i ",aiShip[i][j]);
-	}
-	printf("\n");
-}
-con_sleep(5);
 
 		for (int i = 0; i < 10; i++){
 			fwrite(plShip[i],sizeof(int),10,fs);
@@ -116,14 +111,6 @@ int loadFromFile (Boards *bd, char *filename, int *turnMark, int *gameStyle, int
 				fread(bd->aiShot[i], sizeof(int), 10, fl);
 			}
 
-printf("LOAD FUNC RECEIVED\n");
-for (int i = 0; i < 10; i++){
-	for (int j = 0; j < 10; j++){
-		printf("%i ",bd->aiShip[i][j]);
-	}
-	printf("\n");
-}
-con_sleep(5);
 			fclose(fl);
 			return modeId;
 		}
@@ -221,16 +208,6 @@ void saveFreeMode (int width, int heigth, int **plShip, int **plShot, int **aiSh
 
 		fwrite(&heigth,sizeof(int),1,fs);
 		fwrite(&width,sizeof(int),1,fs);
-
-con_clear();
-printf("SAVE FUNC RECEIVED:\n");
-for (int i = 0; i < 10; i++){
-	for (int j = 0; j < 10; j++){
-		printf("%i ",aiShip[i][j]);
-	}
-	printf("\n");
-}
-con_sleep(5);
 
 		for (int i = 0; i < width; i++){
 			fwrite(plShip[i],sizeof(int),width,fs);
