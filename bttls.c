@@ -1,7 +1,3 @@
-/**
-*	FIXME: atexit(), globalus laiko kintamasis
-*	FIXME: load ir save
-**/
 #include "con_lib.h"
 #include "func.h"
 #include "save_load.h"
@@ -13,9 +9,9 @@
 
 int main(int argc, char** argv) {
 	struct tm *timingStart;
-    time_t rawtime;
-    time(&rawtime);
-    timingStart = localtime(&rawtime);
+	time_t rawtime;
+	time(&rawtime);
+	timingStart = localtime(&rawtime);
 
 	FILE *flog = fopen("log.txt","a");
 	fprintf(flog,"Program run time: %s",asctime(timingStart));
@@ -130,6 +126,9 @@ int main(int argc, char** argv) {
 					p2_status = setScr(x_place,y_place,BRD.aiShip,0,10,10,0);
 				}
 				if (p1_status == 1 && p2_status == 1){
+					con_clear();
+					printf("Player 1 starts the game.\nPress any key to continue.");
+					getchar();
 					gameMP(BRD.plShip,BRD.plShot,BRD.aiShip,BRD.aiShot,1,0,10,10);
 					rembrd(&BRD,10);
 				}
@@ -138,14 +137,7 @@ int main(int argc, char** argv) {
 				nulbrd(&BRD);
 				pre_game_status = setScr(x_place, y_place, BRD.plShip,0,10,10,0);
 				int ai_status = aiSet(BRD.aiShip,0,10,10,0);
-con_clear();con_set_color(0,7);
-for (int i = 0; i < 10; i++){
-	for (int j = 0; j < 10; j++){
-		printf("%i ",BRD.aiShip[i][j]);
-	}
-	printf("\n");
-}
-con_sleep(5);con_clear();
+
 				if (pre_game_status == 1 && ai_status == 1){
 					int game_outcome = game(BRD.aiShip, BRD.aiShot, BRD.plShip, BRD.plShot, 0, 10, 10);//2 = saved, 1 = won, 0 = lost
 					rembrd(&BRD,10);
@@ -158,21 +150,8 @@ con_sleep(5);con_clear();
 			if (load_status == -1){
 				continue; //nebuvo tinkamo failo
 			}
+
 			if (load_status == 1 && gameStyle == 0){
-con_clear();con_set_color(0,7);printf("ABOUT TO ENTER\n");
-for (int i = 0; i < 10; i++){
-	for (int j = 0; j < 10; j++){
-		printf("%i ",BRD.aiShip[i][j]);
-	}
-	printf("\n");
-}
-for (int i = 0; i < 10; i++){
-	for (int j = 0; j < 10; j++){
-		printf("p%i ",BRD.plShip[i][j]);
-	}
-	printf("\n");
-}
-con_sleep(5);con_clear();
 				int game_outcome = game(BRD.aiShip, BRD.aiShot, BRD.plShip, BRD.plShot, 0, 10, 10);
 				nulbrd(&BRD);
 			}
@@ -181,20 +160,6 @@ con_sleep(5);con_clear();
 				nulbrd(&BRD);
 			}
 			if (load_status == 1 && gameStyle == 1){
-con_clear();con_set_color(0,7);printf("ABOUT TO ENTER\n");
-for (int i = 0; i < 10; i++){
-	for (int j = 0; j < 10; j++){
-		printf("%i ",BRD.aiShip[i][j]);
-	}
-	printf("\n");
-}
-for (int i = 0; i < 10; i++){
-	for (int j = 0; j < 10; j++){
-		printf("p%i ",BRD.plShip[i][j]);
-	}
-	printf("\n");
-}
-con_sleep(5);con_clear();
 				int game_outcome = game(BRD.aiShip, BRD.aiShot, BRD.plShip, BRD.plShot, 1, width, heigth);
 			}
 			if (load_status == 2 && gameStyle == 1){

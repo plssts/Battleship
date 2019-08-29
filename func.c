@@ -6,13 +6,16 @@
 #include "con_lib.h"
 #include "save_load.h"
 #include "score.h"
+
 typedef struct{
 	int x, y;
 }Point;
+
 typedef struct{
 	Point *pt;
 	int size;
 }Stack;
+
 void seeTime (){
 	FILE *fo = fopen("log.txt","rb");
 	time_t start, end;
@@ -25,12 +28,13 @@ void seeTime (){
 	fprintf(fo,"Execution time: %lf s\n\n",diff);
 	fclose(fo);
 }
+
 void changePl (){
 	con_clear();
 	for (int i = 5; i > 0; i--){
 		con_set_color(0,1);
 		con_set_pos(4,5);
-		printf("Allow next player to make his shot\n");
+		printf("Allow next player to make their shot\n");
 		con_set_pos(10,7);
 		con_set_color(2,0);
 		if (i <= 3){
@@ -39,7 +43,12 @@ void changePl (){
 		printf("%i\n",i);
 		con_sleep(1);
 	}	
+	con_set_color(0,7);
+	con_set_pos(4,7);
+	printf("Press any key to continue.");
+	getchar();
 }
+
 void grid_t(int x, int y){
 	for (int i = 1; i < (y*2)+2; i=i+2){
     	for (int j = 1; j < (x*3)+2; j++){
@@ -81,17 +90,6 @@ void grid (){
 				printf("|");
 			}
   	}
-
-	//Without gridlines
-	/**
-	for (int i = 2; i < 32 ; i++){
-		con_set_pos(i, 1);printf("-");
-		con_set_pos(i, 21);printf("-");
-	}
-	for (int i = 1; i< 11; i++){
-		con_set_pos(1, i);printf("|");
-		con_set_pos(32, i);printf("|");
-	}**/
 
 	char *rd[10] = {"A","B","C","D","E","F","G","H","I","J"};
 	int ind=0;
@@ -210,9 +208,7 @@ void initStack (Stack *stack){
 int setScr (int cursx, int cursy, int **plShip, int gameStyle, int width, int heigth, int engineCount){
 	int rotation_mark = 0, eng_num = 5;
 	int threeship = 2;
-	if (1/**cursx>width || cursy>heigth || cursx<0 || cursy<0 || gameStyle<0 || gameStyle>1 || width<0 || heigth<0 || width>20 || heigth>10 || engineCount<1 || engineCount>(width*heigth)/3**/){
-		//return 0;
-	}
+
 	if (gameStyle == 0){
   		while(1){
 

@@ -140,7 +140,7 @@ int my_setScr (int cursx, int cursy, int **plShip, int gameStyle, int width, int
 				else if (key == 'p'){
 					int legit = 1;		
 					if (rotation_mark == 0 && legit == 1){
-						for (int i = 0; i < 10; i++){		// FIXME: WTF is THIS FOR for?
+						for (int i = 0; i < 10; i++){		// FIXME: What is THIS FOR for?
 							for (int j = 0; j < eng_num; j++){
 								if (plShip[cursy-1][cursx-1+j] == 1){	// there is a previous ship here (horizontally)
 									legit = 0;
