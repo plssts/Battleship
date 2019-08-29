@@ -1,6 +1,8 @@
-#include "con_lib.h"
+/*
+  courtesy of: https://github.com/tuxmark5
+*/
 
-// Bibliotekos realizacija. TOP SECRET
+#include "con_lib.h"
 #ifdef __linux__
 
 #define _XOPEN_SOURCE 500
@@ -105,7 +107,7 @@ void con_show_echo(int show) {
   }
 }
 
-void con_sleep(float seconds) {    // Pakeistas 0.001f is buvusio 0.01f //
+void con_sleep(float seconds) {    // Made 0.001f from 0.01f //
   if (seconds >= 0.001f && seconds <= 100.0f) {
     usleep((useconds_t) (seconds * 1e6f));
   }
@@ -265,7 +267,7 @@ void con_show_echo(int show) {
   SetConsoleMode(hStdin, fdwMode);*/
 }
 
-void con_sleep(float seconds) {   // Pakeistas 0.001f is buvusio 0.01f //
+void con_sleep(float seconds) {   // Made 0.001f from 0.01f //
   if (seconds >= 0.001f && seconds <= 100.0f) {
     Sleep((DWORD) (seconds * 1e3f));
   }
