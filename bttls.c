@@ -82,6 +82,7 @@ int main(int argc, char** argv) {
 					for (int i = 0; i < heigth; i++){
 						BRD.aiShot[i] = malloc(sizeof(int)*width);
 					}
+					con_clear();
 					gameMP(BRD.plShip,BRD.plShot,BRD.aiShip,BRD.aiShot,1,1,width,heigth);
 					rembrd(&BRD,heigth);
 				}
@@ -133,6 +134,7 @@ int main(int argc, char** argv) {
 					con_clear();
 					printf("Player 1 starts the game.\nPress any key to continue.");
 					getchar();
+					con_clear();
 					gameMP(BRD.plShip,BRD.plShot,BRD.aiShip,BRD.aiShot,1,0,10,10);
 					rembrd(&BRD,10);
 				}

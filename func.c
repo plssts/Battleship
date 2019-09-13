@@ -81,6 +81,7 @@ void grid_t(int x, int y){
 	}
 	fflush(stdout);
 }
+
 void grid (){
 	for (int i = 1; i < 22; i=i+2){
     	for (int j = 1; j< 32; j++){
@@ -109,6 +110,7 @@ void grid (){
 	}
 	fflush(stdout);
 }
+
 void push (Stack *stack, Point pt){
 	Point *oldarr = stack->pt;
 	stack->pt = malloc(sizeof(Point)*(stack->size+1));
@@ -119,6 +121,7 @@ void push (Stack *stack, Point pt){
 	stack->size++;
 	free(oldarr);
 }
+
 void printBoards (int **playerShip, int **playerShot, int width, int heigth){
 	for (int i = 0; i < heigth; i++){
 		for (int j = 0; j < width; j++){
@@ -152,7 +155,7 @@ void printBoards (int **playerShip, int **playerShot, int width, int heigth){
 					int x_place = (cursx - 1)*3 + 2;
 					int y_place = (cursy - 1)*2 + 2;
 					con_set_color(2,0);
-					con_set_pos(x_place, y_place);//pakitimas: x_place+1 ir "*" keista i x_place ir "**"
+					con_set_pos(x_place, y_place);//x_place+1 and "*" to x_place and "**"
 					printf("**");
 				} 
 				else if (playerShip[i][j] == -1){
@@ -161,7 +164,7 @@ void printBoards (int **playerShip, int **playerShot, int width, int heigth){
 					int x_place = (cursx - 1)*3 + 2;
 					int y_place = (cursy - 1)*2 + 2;
 					con_set_color(1,0);
-					con_set_pos(x_place, y_place);//pakitimas: x_place+1 ir "*" keista i x_place ir "**"
+					con_set_pos(x_place, y_place);//x_place+1 and "*" to x_place and "**"
 					printf("**");
 				}
 				else{
@@ -170,7 +173,7 @@ void printBoards (int **playerShip, int **playerShot, int width, int heigth){
 					int x_place = (cursx - 1)*3 + 2;
 					int y_place = (cursy - 1)*2 + 2;
 					con_set_color(0,7);
-					con_set_pos(x_place, y_place);//pakitimas: x_place+1 ir "*" keista i x_place ir "**"
+					con_set_pos(x_place, y_place);//x_place+1 and "*" to x_place and "**"
 					printf("**");
 				}
 			}
@@ -188,6 +191,7 @@ void printBoards (int **playerShip, int **playerShot, int width, int heigth){
 	con_set_color(0,7);
 	fflush(stdout);
 }
+
 void printShips (int **board, int width, int heigth){
 	con_set_color(2,0);
 	for (int i = 0; i < heigth; i++){
@@ -205,10 +209,12 @@ void printShips (int **board, int width, int heigth){
 	fflush(stdout);
 	con_set_color(0,7);
 }
+
 void initStack (Stack *stack){
 	stack->pt = 0; 
 	stack->size = 0;
 }
+
 int setScr (int cursx, int cursy, int **plShip, int gameStyle, int width, int heigth, int engineCount){
 	int rotation_mark = 0, eng_num = 5;
 	int threeship = 2;
@@ -342,22 +348,22 @@ int setScr (int cursx, int cursy, int **plShip, int gameStyle, int width, int he
 				else if (key == 'p'){
 					int legit = 1;		
 					if (rotation_mark == 0 && legit == 1){
-						for (int i = 0; i < 10; i++){		// FIXME: What is THIS FOR for?
+						//for (int i = 0; i < 10; i++){
 							for (int j = 0; j < eng_num; j++){
 								if (plShip[cursy-1][cursx-1+j] == 1){	// there is a previous ship here (horizontally)
 									legit = 0;
 								}
 							}
-						}
+						//}
 					}
 					if (rotation_mark == 1 && legit == 1){
-						for (int i = 0; i < 10; i++){
+						//for (int i = 0; i < 10; i++){
 							for (int j = 0; j < eng_num; j++){
 								if (plShip[cursy-1+j][cursx-1] == 1){	// there is a previous ship here (vertically)
 									legit = 0;
 								}
 							}
-						}
+						//}
 					}
 
 					double distance = 0;
@@ -383,7 +389,7 @@ int setScr (int cursx, int cursy, int **plShip, int gameStyle, int width, int he
 								int y1 = cursy, y2 = valid.pt[i].y;
 								distance = sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
 								if (distance < 1.5){
-									legit = 0;
+									legit = 0; // no ships diagonally
 								}
 							}
 						}
@@ -395,7 +401,7 @@ int setScr (int cursx, int cursy, int **plShip, int gameStyle, int width, int he
 								int y1 = cursy + j, y2 = valid.pt[i].y;
 								distance = sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));
 								if (distance < 1.5){
-									legit = 0;
+									legit = 0; // no ships diagonally
 								}
 							}
 						}
@@ -526,6 +532,7 @@ int setScr (int cursx, int cursy, int **plShip, int gameStyle, int width, int he
 		}
 	}
 }
+
 void rembrd (Boards *bd, int width){
 	for (int i = 0; i < width; i++){
 		if (bd->plShip[i]!= NULL){
@@ -554,12 +561,14 @@ void rembrd (Boards *bd, int width){
 		free(bd->aiShot);
 	}
 }
+
 void rmsingl (int **board){
 	for (int i = 0; i < 10; i++){
 		free(board[i]);
 	}	
 	free(board);
 }
+
 int saveScr (int **plShip, int **plShot, int **aiShip, int **aiShot, int modeId, int turnMark, int gameStyle, int width, int heigth){
 	if (plShip==NULL || plShot==NULL || aiShip==NULL || aiShot==NULL || modeId<1 || modeId>2 || turnMark<0 || turnMark>1 || gameStyle<0 || gameStyle>1 || width<0 || heigth<0 || width>20 || heigth>10){
 		return 0;
@@ -664,6 +673,7 @@ int saveScr (int **plShip, int **plShot, int **aiShip, int **aiShot, int modeId,
 	con_set_pos(20,10);
 	printf("|                                       |\n");
 	fflush(stdout);
+	
 	while(1){
 		con_sleep(0.09);
 		con_set_pos(24,10);
@@ -885,6 +895,7 @@ int saveScr (int **plShip, int **plShot, int **aiShip, int **aiShot, int modeId,
 		}
 	}
 }
+
 int homeScr (){
 	while(1){
 		con_clear();
@@ -1282,33 +1293,32 @@ int game (int **aiShip, int **aiShot, int **plShip, int **plShot, int gameStyle,
 
 		if (player_priv){
 			con_set_color(2,0);
-			con_set_pos(width+4,2);
+			con_set_pos(41,2);
 			printf(" ");
 			con_set_color(0,2);
-			con_set_pos(width+5,2);
+			con_set_pos(42,2);
 			printf("  Your turn\n");
 		}
 		if (player_priv == 0){
 			con_set_color(1,0);
-			con_set_pos(width+4,2);
+			con_set_pos(41,2);
 			printf(" ");
 			con_set_color(0,1);
-			con_set_pos(width+5,2);
+			con_set_pos(42,2);
 			printf("  Your turn\n");
 		}
-fflush(stdout);
+
 		if (ai_priv){
 			con_set_color(0,2);
-			con_set_pos(width+5,3);
+			con_set_pos(41,3);
 			printf("  PC's turn\n");
 		}
 		if (ai_priv == 0){
 			con_set_color(0,1);
-			con_set_pos(width+5,3);
+			con_set_pos(42,3);
 			printf("  PC's turn\n");
 		}
 		con_set_color(0,7);
-fflush(stdout);
 		
 		if (gameStyle == 0){
 			for (int i = 0; i < 10; i++){
@@ -1429,6 +1439,7 @@ fflush(stdout);
 			printf("  PC's turn\n");
 			con_set_color(0,7);
 			con_sleep(1);
+
 			int at_zero = 0; // at the first time with stack = 0
 			if (gameStyle == 0){
 				if (shooting.size == 0){ // if no previous hits
@@ -1536,9 +1547,6 @@ int aiSet (int **board, int gameStyle, int width, int heigth, int engineCount){
 
 	Stack valid;
 	initStack(&valid);
-	if (1/**board==NULL || width<0 || heigth<0 || width>20 || heigth>10 || engineCount<1 || engineCount>(width*heigth)/3**/){
-		//return 0;
-	}
 
   	while(1){
 		if (gameStyle == 0){
@@ -1676,13 +1684,15 @@ int aiSet (int **board, int gameStyle, int width, int heigth, int engineCount){
 		}
 	}
 }
+
 void initBoard (int board[10][10]){
 	for (int i = 0; i < 10; i++){
 		for (int j = 0; j < 10; j++){
-			board[i][j] = 0; // jokios reiksmes koordinatese is pradziu neturi buti.
+			board[i][j] = 0;
 		}
 	}
 }
+
 void helpScr (){
 	int quit = 0;
 	while(1){
@@ -1712,52 +1722,54 @@ int gameMP (int **plShip, int **plShot, int **aiShip, int **aiShot, int turnMark
 	if (plShip==NULL || plShot==NULL || aiShip==NULL || aiShot==NULL || turnMark<0 || turnMark>1 || gameStyle<0 || gameStyle>1 || width<0 || heigth<0 || width>20 || heigth>10){
 		return -2;
 	}
+
 	if (turnMark == 1){
 		player_priv = 1;
 		player2_priv = 0;
 	}
+
 	if (turnMark == 0){
 		player2_priv = 1;
 		player_priv = 0;
 	}
+
 	while(1){
 		grid_t(width,heigth);
 		
 		con_set_color(0,7);
-		con_set_pos(3*width+4,2);
+		con_set_pos(41,2);
 		printf(" ");
-		con_set_pos(3*width+5,3);
+		con_set_pos(41,3);
 		printf(" ");
 
 		if (player_priv){
 			con_set_color(2,0);
-			con_set_pos(3*width+4,2);
+			con_set_pos(41,2);
 			printf(" ");
 			con_set_color(0,2);
-			con_set_pos(3*width+5,2);
+			con_set_pos(42,2);
 			printf("  P1 turn\n");
 		}
 		if (player_priv == 0){
 			con_set_color(2,0);
-			con_set_pos(3*width+4,3);
+			con_set_pos(41,3);
 			printf(" ");
 			con_set_color(0,1);
-			con_set_pos(3*width+5,2);
+			con_set_pos(42,2);
 			printf("  P1 turn\n");
 		}
-//fflush(stdout);
+
 		if (player2_priv){
 			con_set_color(0,2);
-			con_set_pos(3*width+5,3);
+			con_set_pos(42,3);
 			printf("  P2 turn\n");
 		}
 		if (player2_priv == 0){
 			con_set_color(0,1);
-			con_set_pos(3*width+5,3);
+			con_set_pos(42,3);
 			printf("  P2 turn\n");
 		}
 		con_set_color(0,7);
-//fflush(stdout);
 		
 		int x_place = (cursx - 1)*3 + 2;
 		int y_place = (cursy - 1)*2 + 2;
@@ -1835,6 +1847,7 @@ int gameMP (int **plShip, int **plShot, int **aiShip, int **aiShot, int turnMark
 						player2_priv = 1;
 						changePl();
 						con_clear();
+						continue;
 					}
 				}
 				else if (key == 'q'){
@@ -1953,6 +1966,7 @@ int gameMP (int **plShip, int **plShot, int **aiShip, int **aiShot, int turnMark
 		fflush(stdout);	
 	}
 }
+
 int newScr(){
 	while (1){
 		con_clear();
@@ -1979,6 +1993,7 @@ int newScr(){
 		}
 	}
 }
+
 void nulbrd (Boards *bd){
 	bd->plShip = malloc(sizeof(int*)*10);
 	for (int i = 0; i < 10; i++){
@@ -2008,6 +2023,7 @@ void nulbrd (Boards *bd){
 		}
 	}
 }
+
 void sizeSelect(int *width, int *heigth, int *engineCount){
 	int breakOuter = 0;
 	while (1){
